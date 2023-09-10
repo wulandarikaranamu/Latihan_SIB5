@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h3>Data Pegawai</h3>
+    <table border="1" style="padding: 10; text-align: center; width: 100px">
+      <thead>
+        <tr>
+          <th>Pegawai</th>
+          <th>Jabatan</th>
+          <th>Gaji Pokok</th>
+          <th>Tunjangan Jabatan</th>
+          <th>Tunjangan Kesehatan</th>
+          <th>Gaji Kotor</th>
+          <th>Agama</th>
+          <th>Zakat Profesi (2.5 %)</th>
+          <th>Take Home Pay</th>
+        </tr>
+      </thead>
+      <tbody>
+        <script>
+          //diketahui ada 10 orang pegawai 1 s/d 10:
+          //gunakan if multikondisi untuk menentukan jabatan :
+          // - pegawai 1 s/d pegawai 2 jabatan manager, gapok 15 jt
+          // - pegawai 3 s/d pegawai 5 jabatan asisten manager, gapok 10 jt,
+          // - pegawai 6 s/d pegawai 8 jabatan supervisor, gapok 7 jt
+          // - pegawai 9 s/d pegawai 10 jabatan staff, gapok 4 jt
+          //utuk gapok gunakan switch case
+
+          //dari  gapok tentukan :
+          //-tunjangan jabatan = 20 % dari gapok
+          //-tunjangan kesehatan = 10 % dari gapok
+          //-gaji kotor = gapok + tunjab + tunkes
+
+          //gunakan ternary untuk menentukan agama muslim dan nonmuslim
+          //baris ganjil muslim, warna barisnya yellow
+          //baris genap non muslim, warna barisnya biru
+          //jika pegawai muslim dan gaji kotornya 7 jt, ada zakat profesi
+          //sebesar 2,5 % dari gaji kotornya
+          // take home pay = gaji kotor - zakat profesi
+          //cetak menggunakan table html
+          //penyelesaian
+
+          //penyelesaian :
+
+          for (var i = 1; i <= 10; i++) {
+            //var row = pegawai[i];
+            let pegawai = i;
+            jabatan = " ";
+
+            if (pegawai >= 1 && pegawai <= 2) jabatan = "Manager";
+            else if (pegawai >= 3 && pegawai <= 5) jabatan = "Asisten Manager";
+            else if (pegawai >= 6 && pegawai <= 8) jabatan = "Supervisor";
+            else if (pegawai >= 9 && pegawai <= 10) jabatan = "staff";
+            else jabatan = "Nomor pegawai tidak valid";
+
+            //switch case
+            let gaji_pokok;
+            switch (jabatan) {
+              case "Manager":
+                gaji_pokok = 15000000;
+                break;
+              case "Asisten Manager":
+                gaji_pokok = 10000000;
+                break;
+              case "Supervisor":
+                gaji_pokok = 7000000;
+                break;
+              case "staff":
+                gaji_pokok = 4000000;
+                break;
+              default:
+                gaji_pokok = 0;
+            }
+
+            let tunjangan_jabatan = 0.2;
+            let tunjangan_kesehatan = 0.1;
+
+            let total_tunjab = gaji_pokok * tunjangan_jabatan;
+            let total_tunkes = gaji_pokok * tunjangan_kesehatan;
+
+            let gaji_kotor = gaji_pokok + total_tunjab + total_tunkes;
+
+            var background = i % 2 == 0 ? "blue" : "yellow";
+            var agama = i % 2 == 0 ? "Non Muslim" : "Muslim";
+
+            var zakat_profesi;
+            if (agama == "Muslim" && gaji_kotor >= 7000000) {
+              zakat_profesi = 0.025 * gaji_kotor;
+            } else {
+              zakat_profesi = 0;
+            }
+
+            var take_homePay = gaji_kotor - zakat_profesi;
+
+            document.write('<tr style="background-color: ' + background + ';">');
+            document.write("<td>" + i + "</td>");
+            document.write("<td>" + jabatan + "</td>");
+            document.write("<td>" + gaji_pokok + "</td>");
+            document.write("<td>" + total_tunjab + "</td>");
+            document.write("<td>" + total_tunkes + "</td>");
+            document.write("<td>" + gaji_kotor + "</td>");
+            document.write("<td>" + agama + "</td>");
+            document.write("<td>" + zakat_profesi + "</td>");
+            document.write("<td>" + take_homePay + "</td>");
+            document.write("</tr>");
+          }
+        </script>
+      </tbody>
+    </table>
+  </body>
+</html>
