@@ -1,0 +1,36 @@
+/*Selector tag*/
+th {
+  color: white;
+  background-color: #f39c12;
+  font-family: "Poppins", sans-serif;
+  width: 50%;
+  height: 50px;
+  font-size: medium;
+}
+
+/*Selector groping*/
+tr,
+td {
+  height: 40px;
+  width: 50%;
+  background: white;
+  color: black;
+  font-weight: normal;
+}
+
+/*Selector id*/
+#tableku {
+  font-family: sans-serif;
+  color: #666;
+  background: #eaebec;
+  border: #ccc 1px solid;
+  border-collapse: collapse;
+  width: 100%;
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+#spanku {
+  font-weight: lighter;
+}
