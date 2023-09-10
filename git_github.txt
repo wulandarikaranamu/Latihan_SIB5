@@ -1,0 +1,70 @@
+ Perintah Git :
+
+- git config --global user.email "email github"
+
+- git config --global user.name "username github"
+
+- git init
+
+- git config --list
+
+- git clone (salin code dari github)
+
+- cd folder/
+
+- git add .
+
+- git commit -m " komentar"
+
+- git push -u origin main (/master)
+
+=========================================
+
+- git checkout master (branch master)
+
+- git checkout merry (branch merry)
+
+- git add .
+
+- git add (tab)
+
+- git commit -m "komentar"
+
+- git push -u origin main (/master)
+
+- git checkout master (branch master)
+
+- git marge merry
+
+- git push
+
+========================================
+
+- git init
+
+- git remote add origin https://github.com/wulandarikaranamu/tugas_tugas_SIB5.git
+
+- git remote origin(nama kita)
+
+- git pull origin main(/master)
+
+- git branch (nama branch)
+
+- git checkout (nama branch)
+
+- git add .
+
+- git commit -m "komentar"
+
+- git push -u origin (nama_branch)
+
+===========================================
+
+- git add .
+
+- git status
+
+- git commit -m "komentar"
+
+- git push -u origin (nama_branch)
+
