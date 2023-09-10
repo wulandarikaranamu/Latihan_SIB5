@@ -1,0 +1,52 @@
+/*css universisal (*) semua css akan terpengaruh*/
+
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  background-image: url("../img/header-bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  padding: 20px;
+  text-align: center;
+  color: white;
+}
+.navbar {
+  overflow: hidden;
+  background-color: bisque;
+}
+.navbar a {
+  float: left;
+  display: block;
+  color: black;
+  text-align: center;
+  padding: 16px 18px;
+  text-decoration: none;
+}
+.navbar a:hover {
+  background-color: white;
+  color: black;
+}
+.column {
+  float: left;
+  padding: 10px;
+}
+.column.side {
+  width: 30%;
+}
+.column.middle {
+  width: 30%;
+}
+
+/*clear float dan memisahkan dari column sebelumnya*/
+.row::after {
+  content: "";
+  display: table;
+  clear: both; /*membersihkan float sebelumnya*/
+}
+.footer {
+  background-color: burlywood;
+  padding: 10px;
+  text-align: center;
+}
