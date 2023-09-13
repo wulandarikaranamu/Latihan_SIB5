@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <title>Toko Online</title>
+</head>
+<body>
+    <!-- Buatlah Form toko online untuk pelanggan yang ingin membeli produk dengan element form :
+    1. inputkan nama pelanggan (name=nama)
+    2. Select option produk, gunakan struktur kendali switch case untuk menentukan harga produk:
+    Tv 2jt, AC 3 jt, kulkas 4jt (name=produk)gunakan looping for u/ data produk
+    3. inputan banyak item produk dibeli(name=jumlah)
+    4. tombol beli(name=proses)
+
+    Tampilkan populasi data berbentuk alert Javascript
+    dengan mengasosiasikan fungsi (nama fungsi transaksi) dan event handler onclick:
+    1. Nama Pelanggan
+    2. Produk yang dibeli
+    3. Harga satuan
+    4. Jumlah item produk yang dibeli
+    5. Harga Kotor = harga satuan * jumlah item produk yang dibeli
+    6. diskon dengan multiple IF dengan ketentuan :
+       - jika beli kulkas minimal 3 buah, diskon 30% dari harga kotor
+       - jika beli AC minimal 3 buah, diskon 20% dari harga kotor
+       - selain itu semua pelanggan dapat diskon 10 % dari harga kotor
+    7. Pajak pertambahan nilai (PPN) ditanggung pembeli, 10 % dari harga kotor - diskon
+    8. Harga bayar = (harga kotor - diskon) + PPN
+    -->
+    <h1>Toko Online</h1>
+    <form id="online">
+        <label for="">Nama Pelanggan : </label>
+        <input type="text" name="nama" id=""><br><br>
+    
+        <label for=""> Nama Produk : </label>
+        <select name="produk" id=""></select><br><br>
+    
+
+        <label for="">Jumlah produk : </label>
+        <input type="text" name="jumlah" id=""><br><br>
+
+        <input type="button" name="proses" value="Beli" id="" onclick="transaksi()" >
+    </form>
+    <script src="JS/toko.js"></script>
+</body>
+</html>
