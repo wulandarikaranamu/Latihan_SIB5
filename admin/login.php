@@ -41,7 +41,6 @@
 </html>
 
 <?php 
-   
     function cekLogin($username, $password) {
         if($username === "admin" && $password === "mimin"){
             header("Location: index.php");
