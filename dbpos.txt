@@ -1,0 +1,60 @@
+CREATE DATABASE dbpos;
+
+use dbpos;
+
+CREATE TABLE kartu (
+	id integer auto_increment 		
+    primary key,
+	kode varchar(4) unique,
+	nama varchar(30) not null,
+	diskon double default 0,
+	iuran double default 0
+);
+
+CREATE TABLE pelanggan (
+	id int AUTO_INCREMENT PRIMARY KEY,
+    kode varchar(10) UNIQUE,
+    nama varchar(45),
+    jk char(1),
+    tmp_lahir varchar(30),
+    tgl_lahir date,
+    email varchar(45),
+    kartu_id int NOT NULL REFERENCES kartu (id)
+);
+
+CREATE TABLE pesanan (
+    id int not null AUTO_INCREMENT PRIMARY KEY,
+    tanggal date,
+    total double,
+    pelanggan_id int NOT NULL REFERENCES pelanggan(id)
+);
+
+CREATE TABLE pembayaran(
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    noikuitansi varchar(10) UNIQUE,
+    tanggal date,
+    jumlah double,
+    ke int,
+    pesanan_id int NOT NULL REFERENCES pesanan (id)
+);
+
+CREATE TABLE jenis_produk(
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nama varchar(45)
+);
+
+CREATE TABLE produk (
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    kode varchar(10),
+    nama varchar(45),
+    harga_beli double,
+    harga_jual double,
+    stok int,
+    min_stok int,
+    jenis_produk_id int NOT NULL REFERENCES jenis_produk(id)
+);
+
+Note :
+//Buat table pesanan_items
+//Buat table vendor
+//Buat table Pembelian

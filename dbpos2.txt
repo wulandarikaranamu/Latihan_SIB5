@@ -1,0 +1,35 @@
+//menambahkan data di tabel jenis_produk
+INSERT INTO jenis_produk VALUES ('','Elektronik'),
+('','Furniture'),
+('','Makanan'),
+('','Minuman'),
+('','Komputer');
+
+//menambahkan data di tabel produk
+INSERT INTO `produk` (`id`, `kode`, `nama`, `harga_beli`, `harga_jual`, `stok`, `min_stok`, `jenis_produk_id`) 
+VALUES (NULL, 'TV01', 'Televisi 21 Inch', '35000000', '5000000', '5', '2', '1'),
+(NULL, 'TV02', 'Televisi 14 Inch', '6000000', '96000000', '4', '2', '1'),
+(NULL, 'K001', 'Kulkas 2 Pintu', '3500000', '4600000', '6', '2', '1'),
+(NULL, 'M001', 'Meja Makan', '500000', '600000', '4', '3', '2'),
+(NULL, 'TK01', 'Teh Kotak', '2000', '3500', '6', '10', '4');
+
+//menambahkan data pada tabel pelanggan
+INSERT INTO `pelanggan` (`id`, `kode`, `nama`, `jk`, `tmp_lahir`, `tgl_lahir`, `email`, `kartu_id`) VALUES 
+(NULL, 'C001', 'Merry Wulandari', 'P', 'Tapalang', '2023-10-21', 'wulandarikaranamu02@gmail.com', ''),
+(NULL, 'C002', 'Ahmad Afrisal', 'L', 'Campa', '2002-04-23', 'ahmadafrisal01@gmail.com', ''),
+(NULL, 'C003', 'Putri Mayang Sari', 'P', 'Mamuju', '1999-08-1', 'mayang@gmail.com', ''),
+(NULL, 'C004', 'Andi ALviansyah', 'L', 'Majene', '2006-03-23', 'Andi@gmail.com', '');
+
+//menambahkan data pada table kartu
+INSERT INTO `kartu` (`id`, `kode`, `nama`, `diskon`, `iuran`) VALUES 
+(NULL, 'Gold', 'Gold Utama', '0.05', '10000'), 
+(NULL, 'PLAT', 'Platinum Jaya', '', '150000'),
+(NULL, 'SLV', 'Silver', '0.025', '500000'), 
+(NULL, 'No', 'No member', '', '');
+
+//menampilkan hasil menggunakan selec klausa WHERE
+SELECT kode, nama, stok FROM produk WHERE stok = 4;
+SELECT * FROM pelanggan WHERE tmp_lahir = 'jakarta';
+SELECT * FROM pelanggan ORDER BY tgl_lahir DESC;
+SELECT * from produk WHERE stok=3 OR stok=10;
+SELECT * FROM produk WHERE harga_jual < 5000000 AND harga_jual > 500000;

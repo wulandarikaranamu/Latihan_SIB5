@@ -1,0 +1,46 @@
+//DML INSERT UPDATE DELETE dan select
+
+//perintah menginsert
+INSERT INTO jenis_produk VALUES
+('','Elektronik'), ('','Furniture'),('','Makanan'), ('','Minuman');
+
+//insert dengan memanggil nama kolom dan id table sebelah
+INSERT INTO produk (nama, harga, stok, idjenis, foto) VALUES 
+('TV',200000,3,1,'tv.jpg'), ('Meja',300000,3,2,'meja.jpg');
+
+//update data produk
+UPDATE produk SET nama = 'TV LCD', harga = 400000 WHERE id = 1;
+
+//mengahpus data table colom tertentu
+DELETE FROM produk WHERE id = 2;
+
+//select menampilkan semua kolom pada tabel
+SELECT * FROM `jenis_produk`;
+
+//select menampilkan field tertentu dalam satu kolom
+SELECT nama, harga, stok FROM produk;
+
+//select menggunakan klausa WHERE 
+SELECT nama, harga, stok FROM produk WHERE stok < 40;
+
+//insert ke dalam tabel produk
+INSERT INTO produk (nama, harga, stok, idjenis, foto) VALUES ('Nasi Goreng',2000,10,3,'nasi.png'),
+('Coca-cola',3000,20,4,'coca.png'),
+('Kursi',400000,20,2,'kursi.png'),
+('Handphone',5000000,10,1,'hp.png'),
+('sprite',4000,4,4,'sprite.png');
+
+//contoh penggunaan select di gabungkan dengan kalusa WHERE dan operator
+SELECT * FROM `produk` WHERE stok <= 10;
+//nampilan semua data di 1 kolom 
+SELECT * FROM `produk` WHERE nama='sprite';
+
+//menampilkan data dari besar ke terkecil
+key=> ORDER BY
+key=> DESC
+SELECT * FROM `produk` ORDER BY harga DESC;
+
+//menampilkan data dari besar ke terkecil
+key=> ORDER BY
+key=> ASC
+SELECT * FROM `produk` ORDER BY harga ASC;
