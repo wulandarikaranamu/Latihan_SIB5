@@ -13,12 +13,25 @@ VALUES (NULL, 'TV01', 'Televisi 21 Inch', '35000000', '5000000', '5', '2', '1'),
 (NULL, 'M001', 'Meja Makan', '500000', '600000', '4', '3', '2'),
 (NULL, 'TK01', 'Teh Kotak', '2000', '3500', '6', '10', '4');
 
+(NULL, 'FK01', 'Televisi 21 Inch', '35000000', '5000000', '5', '2', '1'),
+(NULL, 'FK04', 'Fruit', '50000', '55000', '8', '3', '3'),
+(NULL, 'L005', 'Laptop Asus', '6000000', '630000000', '9', '4', '5'),
+(NULL, 'L006', 'Laptop Lenovo', '8000000', '850000000', '7', '3', '2'),
+(NULL, 'H008', 'Hendphone Oppo', '2000000', '25000000', '3', '2', '1');
+
 //menambahkan data pada tabel pelanggan
 INSERT INTO `pelanggan` (`id`, `kode`, `nama`, `jk`, `tmp_lahir`, `tgl_lahir`, `email`, `kartu_id`) VALUES 
 (NULL, 'C001', 'Merry Wulandari', 'P', 'Tapalang', '2023-10-21', 'wulandarikaranamu02@gmail.com', ''),
 (NULL, 'C002', 'Ahmad Afrisal', 'L', 'Campa', '2002-04-23', 'ahmadafrisal01@gmail.com', ''),
 (NULL, 'C003', 'Putri Mayang Sari', 'P', 'Mamuju', '1999-08-1', 'mayang@gmail.com', ''),
 (NULL, 'C004', 'Andi ALviansyah', 'L', 'Majene', '2006-03-23', 'Andi@gmail.com', '');
+
+(NULL, 'C005', 'Dewi Ambari', 'P', 'Mamuju', '1986-06-21', 'dewi@gmail.com', ''),
+(NULL, 'C006', 'zahra', 'P', 'Surabaya', '2003-07-04', 'zahra14@gmail.com', ''),
+(NULL, 'C007', 'Danish', 'L', 'Yogyakarta', '2016-06-26', 'dniss@gmail.com', ''),
+(NULL, 'C008', 'Izzar', 'L', 'Jakarta', '2018-12-02', 'izzar02@gmail.com', ''),
+(NULL, 'C009', 'Naufal', 'L', 'Papua', '2017-04-13', 'naufal@gmail.com', ''),
+(NULL, 'C0010', 'Adel', 'P', 'Bandung', '2019-12-16', 'adel@gmail.com', '');
 
 //menambahkan data pada table kartu
 INSERT INTO `kartu` (`id`, `kode`, `nama`, `diskon`, `iuran`) VALUES 
@@ -33,3 +46,6 @@ SELECT * FROM pelanggan WHERE tmp_lahir = 'jakarta';
 SELECT * FROM pelanggan ORDER BY tgl_lahir DESC;
 SELECT * from produk WHERE stok=3 OR stok=10;
 SELECT * FROM produk WHERE harga_jual < 5000000 AND harga_jual > 500000;
+
+DESC = dari terbesar ke terkecil
+ASC = dari terkecil ke terbesar

@@ -56,5 +56,30 @@ CREATE TABLE produk (
 
 Note :
 //Buat table pesanan_items
+CREATE TABLE pesanan_items(
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    produk_id int NOT NULL REFERENCES produk(id),
+    pesanan_id int NOT NULL REFERENCES pesanan(id),
+    qty int NOT NULL,
+    harga double NOT NULL
+);
+
 //Buat table vendor
+CREATE TABLE vendor(
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nomor varchar (4) NOT NULL,
+    nama varchar (40),
+    kota varchar (30) NOT NULL,
+    kontak varchar (30) NOT NULL
+);
+
 //Buat table Pembelian
+CREATE TABLE pembelian(
+	id int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    tanggal varchar (45),
+    nomor varchar (10),
+    produk_id int NOT NULL REFERENCES produk(id),
+    jumlah int (11),
+    harga double,
+    vendor_id int NOT NULL REFERENCES vendor(id)
+);
