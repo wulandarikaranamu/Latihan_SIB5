@@ -1,0 +1,168 @@
+//menampilkan stok yang paling banyak
+1.  SELECT * FROM produk WHERE stok = (SELECT MAX(stok) FROM produk);
+
+//menampilkan stok yang paling sedikit
+2. SELECT * FROM produk WHERE stok = (SELECT MIN(stok) FROM produk);
+
+//menampilkan stok menggunakan AVG
+3. SELECT * FROM produk WHERE stok = (SELECT AVG(stok) FROM produk);
+
+//klausa DISTINCT => ini meniadakan sesuatu yang sama atau ada data yang duplikat
+ SELECT DISTINCT stok FROM produk;
+
+//menampilkan semua data di tabel produk
+SELECT * FROM produk;
+
+//pengkondisian di SQL dengan klausa CASE 
+key => CASE, WHEN, THEN, ELSE, END AS.
+MariaDB [dbpos]> SELECT nama, harga_jual, stok,
+    -> CASE
+    -> WHEN stok >= 5 THEN 'CUKUP'
+    -> ELSE 'KURANG'
+    -> END AS keterangan FROM produk;
++------------------+------------+------+------------+
+| nama             | harga_jual | stok | keterangan |
++------------------+------------+------+------------+
+| Televisi 21 Inch |    5000000 |    5 | CUKUP      |
+| Televisi 14 Inch |   96000000 |    4 | KURANG     |
+| Kulkas 2 Pintu   |    4600000 |    6 | CUKUP      |
+| Meja Makan       |     600000 |    4 | KURANG     |
+| Teh Kotak        |       3500 |    6 | CUKUP      |
+| Televisi 21 Inch |    5000000 |    5 | CUKUP      |
+| Fruit            |      55000 |    8 | CUKUP      |
+| Laptop Asus      |  630000000 |    9 | CUKUP      |
+| Laptop Lenovo    |  850000000 |    7 | CUKUP      |
+| Hendphone Oppo   |   25000000 |    3 | KURANG     |
++------------------+------------+------+------------+
+10 rows in set (0.007 sec)
+
+//klausa case ke dua 
+key => SUM, GROUP BY
+MariaDB [dbpos]> SELECT CASE
+    -> WHEN jenis_produk_id = 1 THEN 'ELEKTRONIK'
+    -> WHEN jenis_produk_id = 2 THEN 'FURNITURE'
+    -> WHEN jenis_produk_id = 3 THEN 'MAKANAN'
+    -> ELSE 'MINUMAN'
+    -> END AS kategori, SUM(stok) AS jml FROM produk GROUP BY
+jenis_produk_id;
++------------+------+
+| kategori   | jml  |
++------------+------+
+| ELEKTRONIK |   23 |
+| FURNITURE  |   11 |
+| MAKANAN    |    8 |
+| MINUMAN    |    6 |
+| MINUMAN    |    9 |
++------------+------+
+5 rows in set (0.014 sec)
+
+//klausa groub by adalah pengelompokkan
+SELECT jenis_produk_id, SUM(harga_jual) AS To
+tal_harga_jual FROM produk GROUP BY jenis_produk_id;
++-----------------+------------------+
+| jenis_produk_id | Total_harga_jual |
++-----------------+------------------+
+|               1 |        135600000 |
+|               2 |        850600000 |
+|               3 |            55000 |
+|               4 |             3500 |
+|               5 |        630000000 |
++-----------------+------------------+
+5 rows in set (0.067 sec)
+
+//klausa HAVING
+HAVING ini digunakan untuk memfilter suatu data yang sudah dikelompokkan, klausa ini
+selalu berhubungan dengan GROUB BY
+key => HAVING
+
+SELECT stok, COUNT(stok) AS jumlah_stok FROM produk GROUP BY stok HAVING count(stok) < 3;
++------+-------------+
+| stok | jumlah_stok |
++------+-------------+
+|    3 |           1 |
+|    4 |           2 |
+|    5 |           2 |
+|    6 |           2 |
+|    7 |           1 |
+|    8 |           1 |
+|    9 |           1 |
++------+-------------+
+7 rows in set (0.039 sec)
+
+SELECT jenis_produk_id, COUNT(jenis_produk_id) AS jumlah_jenis_produk FROM produk GROUP BY jenis_produk_id
+HAVING count(jenis_produk_id) > 3;
++-----------------+---------------------+
+| jenis_produk_id | jumlah_jenis_produk |
++-----------------+---------------------+
+|               1 |                   5 |
++-----------------+---------------------+
+1 row in set (0.006 sec)
+
+# Contoh soal
+//mengalikan antara harga_beli dan stok
+MariaDB [dbpos]> SELECT SUM(harga_beli * stok) AS Total FROM produk;
++-----------+
+| Total     |
++-----------+
+| 513412000 |
++-----------+
+1 row in set (0.003 sec)
+
+//menghitung selisih antara stok dan min stok
+MariaDB [dbpos]> SELECT SUM(stok - min_stok) AS selesih FROM produk;
++---------+
+| selesih |
++---------+
+|      24 |
++---------+
+1 row in set (0.040 sec)
+
+//klausa BETWEEN (antara)
+key = YEAR, BETWEEN, AND.
+MariaDB [dbpos]> SELECT * FROM pelanggan WHERE YEAR(tgl_lahir)BETWEEN 2003 AND 2018;
++----+------+-----------------+------+------------+------------+-------------------+----------+
+| id | kode | nama            | jk   | tmp_lahir  | tgl_lahir  | email             | kartu_id |
++----+------+-----------------+------+------------+------------+-------------------+----------+
+|  4 | C004 | Andi ALviansyah | L    | Majene     | 2006-03-23 | Andi@gmail.com    |        4 |
+|  7 | C006 | zahra           | P    | Surabaya   | 2003-07-04 | zahra14@gmail.com |        0 |
+|  8 | C007 | Danish          | L    | Yogyakarta | 2016-06-26 | dniss@gmail.com   |        0 |
+|  9 | C008 | Izzar           | L    | Jakarta    | 2018-12-02 | izzar02@gmail.com |        0 |
+| 10 | C009 | Naufal          | L    | Papua      | 2017-04-13 | naufal@gmail.com  |        0 |
++----+------+-----------------+------+------------+------------+-------------------+----------+
+5 rows in set (0.099 sec)
+
+//key => YEAR
+MariaDB [dbpos]> SELECT * FROM pelanggan WHERE YEAR(tgl_lahir) = 2002;
++----+------+---------------+------+-----------+------------+--------------------------+----------+
+| id | kode | nama          | jk   | tmp_lahir | tgl_lahir  | email                    | kartu_id |
++----+------+---------------+------+-----------+------------+--------------------------+----------+
+|  2 | C002 | Ahmad Afrisal | L    | Campa     | 2002-04-23 | ahmadafrisal01@gmail.com |        2 |
++----+------+---------------+------+-----------+------------+--------------------------+----------+
+1 row in set (0.014 sec)
+
+//Key => MONTH
+MariaDB [dbpos]> SELECT * FROM pelanggan WHERE MONTH(tgl_lahir) = 04;
++----+------+---------------+------+-----------+------------+--------------------------+----------+
+| id | kode | nama          | jk   | tmp_lahir | tgl_lahir  | email                    | kartu_id |
++----+------+---------------+------+-----------+------------+--------------------------+----------+
+|  2 | C002 | Ahmad Afrisal | L    | Campa     | 2002-04-23 | ahmadafrisal01@gmail.com |        2 |
+| 10 | C009 | Naufal        | L    | Papua     | 2017-04-13 | naufal@gmail.com         |        0 |
++----+------+---------------+------+-----------+------------+--------------------------+----------+
+2 rows in set (0.039 sec)
+
+SELECT nama, tmp_lahir, tgl_lahir, (YEAR(NOW()) - YEAR(tgl_lahir)) AS UMUR FROM pelanggan;
++-------------------+------------+------------+------+
+| nama              | tmp_lahir  | tgl_lahir  | UMUR |
++-------------------+------------+------------+------+
+| Merry Wulandari   | Tapalang   | 2023-10-21 |    0 |
+| Ahmad Afrisal     | Campa      | 2002-04-23 |   21 |
+| Putri Mayang Sari | Mamuju     | 1999-08-01 |   24 |
+| Andi ALviansyah   | Majene     | 2006-03-23 |   17 |
+| Dewi Ambari       | Mamuju     | 1986-06-21 |   37 |
+| zahra             | Surabaya   | 2003-07-04 |   20 |
+| Danish            | Yogyakarta | 2016-06-26 |    7 |
+| Izzar             | Jakarta    | 2018-12-02 |    5 |
+| Naufal            | Papua      | 2017-04-13 |    6 |
+| Adel              | Bandung    | 2019-12-16 |    4 |
++-------------------+------------+------------+------+
+10 rows in set (0.039 sec)

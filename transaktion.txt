@@ -1,0 +1,160 @@
+Note :
+1. START TRANSACTION => memulai menambahkan transaksi baru;
+2. COMMIT => mempermanenkan data;
+3. ROLLBACK => mengembalikkan data semua seperti diawal.
+4. SAVEPOINT => mengupdate data pada data yang sudah tersedia, namun jika di rollback 
+1 data yang kita update tadi akan kembali seperti diawal.
+
+MariaDB [dbpos1]> SELECT * FROM kartu;
++----+------+---------------+--------+--------+
+| id | kode | nama          | diskon | iuran  |
++----+------+---------------+--------+--------+
+|  1 | GOLD | Gold Utama    |   0.05 | 100000 |
+|  2 | PLAT | Platinum Jaya |    0.1 | 150000 |
+|  3 | SLV  | Silver        |  0.025 |  50000 |
+|  4 | NO   | Non Member    |      0 |      0 |
++----+------+---------------+--------+--------+
+4 rows in set (0.003 sec)
+
+# memulai transaksi
+
+MariaDB [dbpos1]> START TRANSACTION;
+Query OK, 0 rows affected (0.000 sec)
+
+#menginsert data baru
+MariaDB [dbpos1]> INSERT INTO kartu (kode, nama, diskon, iuran) VALUES
+    -> ('PGU', 'Perunggu', 0.5,2000);
+Query OK, 1 row affected (0.015 sec)
+
+#melihat hasil baru
+MariaDB [dbpos1]> select * from kartu;
++----+------+---------------+--------+--------+
+| id | kode | nama          | diskon | iuran  |
++----+------+---------------+--------+--------+
+|  1 | GOLD | Gold Utama    |   0.05 | 100000 |
+|  2 | PLAT | Platinum Jaya |    0.1 | 150000 |
+|  3 | SLV  | Silver        |  0.025 |  50000 |
+|  4 | NO   | Non Member    |      0 |      0 |
+|  5 | PGU  | Perunggu      |    0.5 |   2000 |
++----+------+---------------+--------+--------+
+5 rows in set (0.001 sec)
+
+# Kempembahasan ROLLBACK
+
+#mengembalikkan data seperti diawal
+MariaDB [dbpos1]> ROLLBACK;
+Query OK, 0 rows affected (0.005 sec)
+
+MariaDB [dbpos1]> select * from kartu;
++----+------+---------------+--------+--------+
+| id | kode | nama          | diskon | iuran  |
++----+------+---------------+--------+--------+
+|  1 | GOLD | Gold Utama    |   0.05 | 100000 |
+|  2 | PLAT | Platinum Jaya |    0.1 | 150000 |
+|  3 | SLV  | Silver        |  0.025 |  50000 |
+|  4 | NO   | Non Member    |      0 |      0 |
++----+------+---------------+--------+--------+
+4 rows in set (0.001 sec)
+
+
+# kepembahasan COMMIT
+
+#menambahkan data baru
+MariaDB [dbpos1]> INSERT INTO kartu (kode, nama, diskon, iuran) VALUES
+    -> ('PGU', 'Perunggu', 0.5,2000);
+Query OK, 1 row affected (0.004 sec)
+
+#masuk ke COMMIT
+MariaDB [dbpos1]> COMMIT;
+Query OK, 0 rows affected (0.000 sec)
+
+MariaDB [dbpos1]> select * from kartu;
++----+------+---------------+--------+--------+
+| id | kode | nama          | diskon | iuran  |
++----+------+---------------+--------+--------+
+|  1 | GOLD | Gold Utama    |   0.05 | 100000 |
+|  2 | PLAT | Platinum Jaya |    0.1 | 150000 |
+|  3 | SLV  | Silver        |  0.025 |  50000 |
+|  4 | NO   | Non Member    |      0 |      0 |
+|  6 | PGU  | Perunggu      |    0.5 |   2000 |
++----+------+---------------+--------+--------+
+5 rows in set (0.001 sec)
+
+MariaDB [dbpos1]> ROLLBACK;
+Query OK, 0 rows affected (0.000 sec)
+
+# ketika datanya sudah dicommit dan ingin di rollback maka data akan tetap permanen
+MariaDB [dbpos1]> select * from kartu;
++----+------+---------------+--------+--------+
+| id | kode | nama          | diskon | iuran  |
++----+------+---------------+--------+--------+
+|  1 | GOLD | Gold Utama    |   0.05 | 100000 |
+|  2 | PLAT | Platinum Jaya |    0.1 | 150000 |
+|  3 | SLV  | Silver        |  0.025 |  50000 |
+|  4 | NO   | Non Member    |      0 |      0 |
+|  6 | PGU  | Perunggu      |    0.5 |   2000 |
++----+------+---------------+--------+--------+
+5 rows in set (0.003 sec)
+
+# ke pembahasan SAVEPOINT
+
+// memulai transaksi
+MariaDB [dbpos1]> START TRANSACTION;
+Query OK, 0 rows affected (0.009 sec)
+
+//melakukan savepoint
+MariaDB [dbpos1]> SAVEPOINT update_kartu;
+Query OK, 0 rows affected (0.001 sec)
+
+//mengupdate salah satu data pada tabel kartu
+MariaDB [dbpos1]> UPDATE kartu set nama='Perunggu 1' WHERE id=6;
+Query OK, 1 row affected (0.007 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+//melihat perubahan
+MariaDB [dbpos1]> select * from kartu;
++----+------+---------------+--------+--------+
+| id | kode | nama          | diskon | iuran  |
++----+------+---------------+--------+--------+
+|  1 | GOLD | Gold Utama    |   0.05 | 100000 |
+|  2 | PLAT | Platinum Jaya |    0.1 | 150000 |
+|  3 | SLV  | Silver        |  0.025 |  50000 |
+|  4 | NO   | Non Member    |      0 |      0 |
+|  6 | PGU  | Perunggu 1    |    0.5 |   2000 |
++----+------+---------------+--------+--------+
+5 rows in set (0.012 sec)
+
+# setelah savepoint selesai, jika ingin melakukan rollback terhadap kolom yang sudah diubah
+maka dapat menggunakan perintah ROLLBACK to update_kartu;
+
+MariaDB [dbpos1]> ROLLBACK to update_kartu;
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [dbpos1]> select * from kartu;
++----+------+---------------+--------+--------+
+| id | kode | nama          | diskon | iuran  |
++----+------+---------------+--------+--------+
+|  1 | GOLD | Gold Utama    |   0.05 | 100000 |
+|  2 | PLAT | Platinum Jaya |    0.1 | 150000 |
+|  3 | SLV  | Silver        |  0.025 |  50000 |
+|  4 | NO   | Non Member    |      0 |      0 |
+|  6 | PGU  | Perunggu      |    0.5 |   2000 |
++----+------+---------------+--------+--------+
+5 rows in set (0.001 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ROLLBACK to update_kartu;

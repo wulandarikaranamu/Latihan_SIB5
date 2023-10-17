@@ -1,0 +1,61 @@
+inner join
+
+SELECT produk.kode,produk.nama,jenis_produk.nama as Jenis_produk
+    -> FROM produk inner join jenis_produk on produk.jenis_produk_id = jenis_produk.id;
++------+------------------+--------------+
+| kode | nama             | Jenis_produk |
++------+------------------+--------------+
+| TV01 | Televisi 21 Inch | Elektronik   |
+| TV02 | Televisi 14 Inch | Elektronik   |
+| K001 | Kulkas 2 Pintu   | Elektronik   |
+| M001 | Meja Makan       | Furniture    |
+| TK01 | Teh Kotak        | Minuman      |
+| FK01 | Televisi 21 Inch | Elektronik   |
+| FK04 | Fruit            | Makanan      |
+| L005 | Laptop Asus      | Komputer     |
+| L006 | Laptop Lenovo    | Furniture    |
+| H008 | Hendphone Oppo   | Elektronik   |
++------+------------------+--------------+
+10 rows in set (0.058 sec)
+
+left join
+ SELECT produk.kode, produk.nama,jenis_produk.nama as Jenis_produk
+    -> FROM produk left join jenis_produk on produk.jenis_produk_id = jenis_produk.id;
++------+------------------+--------------+
+| kode | nama             | Jenis_produk |
++------+------------------+--------------+
+| TV01 | Televisi 21 Inch | Elektronik   |
+| TV02 | Televisi 14 Inch | Elektronik   |
+| K001 | Kulkas 2 Pintu   | Elektronik   |
+| M001 | Meja Makan       | Furniture    |
+| TK01 | Teh Kotak        | Minuman      |
+| FK01 | Televisi 21 Inch | Elektronik   |
+| FK04 | Fruit            | Makanan      |
+| L005 | Laptop Asus      | Komputer     |
+| L006 | Laptop Lenovo    | Furniture    |
+| H008 | Hendphone Oppo   | Elektronik   |
++------+------------------+--------------+
+
+right join
+
+SELECT produk.kode, produk.nama,jenis_produk.nama as Jenis_produk
+    -> FROM produk right join jenis_produk on produk.jenis_produk_id = jenis_produk.id;
++------+------------------+--------------+
+| kode | nama             | Jenis_produk |
++------+------------------+--------------+
+| TV01 | Televisi 21 Inch | Elektronik   |
+| TV02 | Televisi 14 Inch | Elektronik   |
+| K001 | Kulkas 2 Pintu   | Elektronik   |
+| M001 | Meja Makan       | Furniture    |
+| TK01 | Teh Kotak        | Minuman      |
+| FK01 | Televisi 21 Inch | Elektronik   |
+| FK04 | Fruit            | Makanan      |
+| L005 | Laptop Asus      | Komputer     |
+| L006 | Laptop Lenovo    | Furniture    |
+| H008 | Hendphone Oppo   | Elektronik   |
++------+------------------+--------------+
+
+ SELECT pesanan.id, pesanan.tanggal, pesanan.total, pelanggan.kode,
+    -> pelanggan.nama, kartu.nama as nama_kartu, kartu.diskon
+    -> FROM pesanan INNER JOIN pelanggan ON pesanan.pelanggan_id = pelanggan.id
+    -> INNER JOIN kartu ON pelanggan.kartu_id = kartu.id;
