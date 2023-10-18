@@ -1,0 +1,16 @@
+Membuat fungsi mengurangkan umur dengan inputan
+
+DELIMITER $$
+CREATE FUNCTION umur(tgl_lahir DATE)
+RETURNS INT
+BEGIN
+DECLARE umur INT;
+SET umur = YEAR(CURDATE())-YEAR(tgl_lahir);
+RETURN umur;
+END $$
+DELIMITER ;
+
+panggil function jika ingin ditampilkan
+SELECT kode, nama, jk, umur(tgl_lahir) AS umur FROM pelanggan;
+
+-----------------------------------------------------------------

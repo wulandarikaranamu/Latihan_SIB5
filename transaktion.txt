@@ -141,20 +141,3 @@ MariaDB [dbpos1]> select * from kartu;
 |  6 | PGU  | Perunggu      |    0.5 |   2000 |
 +----+------+---------------+--------+--------+
 5 rows in set (0.001 sec)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-ROLLBACK to update_kartu;

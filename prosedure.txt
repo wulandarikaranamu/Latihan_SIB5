@@ -1,0 +1,73 @@
+// membuat prosedure di tabel produk
+
+//PROCEDURE tanpa parameter
+DELIMITER $$
+	CREATE PROCEDURE showProduk()
+    BEGIN
+    SELECT kode, nama, harga, stok FROM produk;
+    END
+    $$
+DELIMITER ;
+panggil CALL showProduk();
+----------------------------------------------------------------
+//PROCEDURE dengan parameter
+DELIMITER $$
+	CREATE PROCEDURE showProdukElektronik(id int)
+    BEGIN
+    SELECT * FROM produk WHERE jenis_produk_id = id;
+    END $$
+DELIMITER ;
+// panggil CALL showProdukElektronik(1);
+----------------------------------------------------------------
+//PROCEDURE dengan banyak produk
+
+DELIMITER $$
+	CREATE PROCEDURE inputPesanan(tanggal date, total double, pelanggan_id int)
+    BEGIN
+    INSERT INTO pesanan (tanggal, total, pelanggan_id) VALUES (tanggal, total, pelanggan_id);
+    END $$
+DELIMITER ;
+
+panggil CALL inputPesanan('2015-11-04',30000,9);
+
+perintah di CMD menampilkan PROCEDURE
+SELECT routine_name, routine_type, routine_schema
+-> FROM information_schema.routines WHERE routine_type = 'PROCEDURE'
+-> AND routine_schema = 'dbpos1';
+
+------------------------------------------------------------------
+//RETURN PROCEDURE
+
+DELIMITER $$ 
+	CREATE PROCEDURE totalHarga(
+        in harga double, in jml int, out total double)
+        BEGIN
+        SET total = harga * jml;
+        SELECT @total;
+        END $$
+DELIMITER ;
+
+panggil CALL totalHarga(25000,4, @totalHarga);
+
+menampilkan SELECT @totalHarga;
+------------------------------------------------------------------
+// masih RETURN PROCEDURE 
+contoh kasus membuat procedure dengan menaikkan persentasi produk
+
+DELIMITER $$
+	CREATE PROCEDURE pro_naik(
+        IN jenis_produk INT,
+        IN persentasi_kenaikan INT)
+        BEGIN
+        UPDATE produk SET harga_jual = harga_jual + (harga_jual * persentasi_kenaikan / 100)
+        WHERE jenis_produk_id = jenis_produk
+        END $$
+DELIMITER ;
+
+menampilkan
+SELECT nama,harga_jual,jenis_produk_id FROM produk;
+
+Menaikkan persentasi produk
+CALL pro_naik(5,4);
+
+------------------------------------------------------------------
