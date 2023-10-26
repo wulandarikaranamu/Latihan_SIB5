@@ -29,12 +29,14 @@ $data_jenisProduk = $model->dataJenis();
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
                                             <th>No</th>
                                             <th>Nama</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -45,6 +47,15 @@ $data_jenisProduk = $model->dataJenis();
                                         <tr>
                                             <td><?= $no++ ?></td>
                                             <td><?= $row['nama']?></td>
+                                            <td>
+                                                <form action="jenis_controller.php" method="POST">
+                                                    <a href="index.php?url=jenis_form&idedit=<?= $row ['id'];?>" class="btn btn-warning btn-sm">
+
+                                                    Ubah
+
+                                                    </a>
+                                                </form>
+                                            </td>
                                         </tr>
                                       <?php
                                         }
