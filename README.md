@@ -1,2 +1,2 @@
-# Latihan_SIB5
-ini adalah Kumpulan latihan SIB5 PT.HTP
+# tugas_tugas_SIB5
+ini adalah kumpulan tugas SIB 5

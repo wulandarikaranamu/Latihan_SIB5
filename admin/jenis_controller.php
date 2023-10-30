@@ -1,10 +1,11 @@
-<?php 
+<?php
+
 include_once 'koneksi.php';
 include_once 'models/Jenis_produk.php';
-//tampilkan request
+//tangkap request 
 $nama = $_POST['nama'];
 
-//simpan di dalam data
+//simpan didalam data
 $data = [
     $nama
 ];
@@ -17,9 +18,7 @@ switch($tombol){
     case 'simpan':$model->simpan($data); break;
     case 'ubah' : $data[] = $_POST['idx']; $model->ubah($data); break;
     default:
-    header('Location:index.php?url=jenis_produk');
+    header('Location:index.php?url=jenisProduk');
     break;
 }
-header('Location:index.php?url=jenis_produk');
-
-?>
+header('Location:index.php?url=jenisProduk');

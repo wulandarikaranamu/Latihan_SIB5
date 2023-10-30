@@ -16,9 +16,15 @@
                             </a>
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="index.php?url=produk">Produk</a>
-                                    <a class="nav-link" href="index.php?url=jenis_produk">Jenis Produk</a>
-                                    <a class="nav-link" href="index.php?url=kartu">Kartu Pelanggan</a> 
+                                <a class="nav-link" href="index.php?url=produk">Produk</a>
+                                <?php 
+                                if($sesi['role'] != 'staff'){
+
+                                ?>
+                                    <a class="nav-link" href="index.php?url=jenisProduk">Jenis Produk</a>
+
+                                    <?php } ?>
+                                    <a class="nav-link" href="index.php?url=kartu">Kartu Pelanggan</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsePages" aria-expanded="false" aria-controls="collapsePages">
@@ -32,13 +38,6 @@
                                         Authentication
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                                     </a>
-
-                                   <!-- ini adalah penambahan menu About, Contact dan Data Table -->
-                                    <a class="nav-link" href="about.php">About</a>
-                                    <a class="nav-link" href="contact.php">Contact</a>
-                                    <a class="nav-link" href="dataTable.php">Data Table</a>
-                      
-
                                     <div class="collapse" id="pagesCollapseAuth" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordionPages">
                                         <nav class="sb-sidenav-menu-nested nav">
                                             <a class="nav-link" href="login.html">Login</a>
@@ -46,7 +45,6 @@
                                             <a class="nav-link" href="password.html">Forgot Password</a>
                                         </nav>
                                     </div>
-                                   
                                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#pagesCollapseError" aria-expanded="false" aria-controls="pagesCollapseError">
                                         Error
                                         <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>

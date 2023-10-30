@@ -1,9 +1,14 @@
 <?php
 session_start();
+// include_once 'admin/koneksi.php';
+// include_once 'models/Member.php';
+// include_once 'admin/models/Produk.php';
+
 global $member;
 global $role;
 
 include_once 'header.php';
+
 
 error_reporting(0);
 $hal = $_GET['hal'];
@@ -14,6 +19,7 @@ if($hal == '/'){
 } else {
 	include_once 'home.php';
 }
+
 
 include_once 'footer.php';
 ?>

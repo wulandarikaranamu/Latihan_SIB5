@@ -1,9 +1,9 @@
-<?php 
+<?php
 $model = new Produk();
 $data_produk = $model->dataProduk();
 
-$member = $_SESSION['MEMBER'];
-if(isset($member)){
+// $member = $_SESSION['MEMBER'];
+// if(isset($member)){
 
 
 ?>
@@ -24,9 +24,8 @@ if(isset($member)){
                         </div>
                         <div class="card mb-4">
                             <div class="card-header">
-                                <i class="fas fa-table me-1"></i>
                                 <a href="index.php?url=produk_form">
-                                <button class="btn btn-sm btn-primary">Tambah</button>
+                                    <button class="btn btn-sm btn-primary">Tambah</button>
                                 </a>
                             </div>
                             <div class="card-body">
@@ -42,6 +41,7 @@ if(isset($member)){
                                             <th>Minimal Stok</th>
                                             <th>Jenis Produk</th>
                                             <th>Aksi</th>
+                                           
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -54,51 +54,58 @@ if(isset($member)){
                                             <th>Stok</th>
                                             <th>Minimal Stok</th>
                                             <th>Jenis Produk</th>
-                                            <th>Aksi</th>
+                                            <th>Aksi</th>    
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                    <?php 
+                                        <?php 
                                         $no = 1;
                                         foreach ($data_produk as $produk){
-                                    ?>
+
+                                        ?>
                                         <tr>
                                             <td><?= $no++ ?></td>
-                                            <td><?= $produk['kode']?></td>
-                                            <td><?= $produk['nama']?></td>
-                                            <td><?= $produk['harga_beli']?></td>
-                                            <td><?= $produk['harga_jual']?></td>
-                                            <td><?= $produk['stok']?></td>
-                                            <td><?= $produk['min_stok']?></td>
-                                            <td><?= $produk['jenis']?></td>
+                                            <td><?= $produk['kode'] ?></td>
+                                            <td><?= $produk['nama'] ?></td>
+                                            <td><?= $produk['harga_beli'] ?></td>
+                                            <td><?= $produk['harga_jual'] ?></td>
+                                            <td><?= $produk['stok'] ?></td>
+                                            <td><?= $produk['min_stok'] ?></td>
+                                            <td><?= $produk['jenis'] ?></td>
                                             <td>
                                                 <form action="produk_controller.php" method="POST">
-                                                    <a href="index.php?url=produk_detail&id=<?=$produk['id'] ?>">
+                                                    <a href="index.php?url=produk_detail&id=<?= $produk['id'] ?>">
                                                         <button type="button" class="btn btn-info btn-sm">Detail</button>
                                                     </a>
+                                                    <?php
+                                                    if ($sesi['role'] != 'staff'){
+                                                        ?>
+                                                    
                                                     <a href="index.php?url=produk_form&idedit=<?= $produk['id']?>">
-                                                    <button type="button" class="btn btn-warning btn-sm">ubah</button>
+                                                        <button type="button" class="btn btn-warning btn-sm">Ubah</button>
                                                     </a>
-                                                    <a href="">
-                                                        <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus"
-                                                        name="" value="" onclick="return confirm('anda yakin akan menghapus')" >Hapus</button>
-                                                        <input type="hidden" name="idx" value="<?= $produk['id']?>">
-                                                    </a>
+
+                                                    <button type="submit" class="btn btn-danger btn-sm" name="proses" value="hapus" 
+                                                    onclick="return confirm('anda Yakin akan menghapus')" >Hapus</button>
+                                                    <input type="hidden" name="idx" value="<?= $produk ['id']?> ">
+                                                    <?php  }
+                                                    ?>
                                                 </form>
                                             </td>
-                                        </tr>
-                                      <?php
-                                        }
-                                      ?>
+                                    </tr>
+                                    <?php
+                                    
+                                }
+                                    ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                     </div>
                 </main>
-                <?php }
-                    else{
-                       echo "<script>alert('anda tidak boleh masuk');history.back();</script>";
-                    }
-                ?>
-                
+            <?php 
+            // } 
+            // else {
+            //     echo "<script> alert('anda tidak boleh masuk');history.back();</script>";
+            // }
+            ?>

@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Jenis_produk{
     private $koneksi;
@@ -16,9 +16,8 @@ class Jenis_produk{
     $rs = $ps->fetchAll();
     return $rs;
 }
-
 public function simpan($data){
-    $sql = "INSERT INTO jenis_produk(nama) VALUES (?)";
+    $sql = "INSERT INTO jenis_produk (nama) VALUES (?)";
     $ps = $this->koneksi->prepare($sql);
     $ps->execute($data);
 }
@@ -30,11 +29,10 @@ public function getJenis($id){
     return $rs;
 }
 public function ubah($data){
-    $sql = "UPDATE jenis_produk SET nama=? WHERE id = ?";
+    $sql = "UPDATE jenis_produk SET nama=? WHERE id = ? ";
     $ps = $this->koneksi->prepare($sql);
     $ps->execute($data);
 }
-
 }
 
 ?>
