@@ -1,6 +1,11 @@
 <?php 
 $model = new Produk();
 $data_produk = $model->dataProduk();
+
+$member = $_SESSION['MEMBER'];
+if(isset($member)){
+
+
 ?>
 
 <main>
@@ -91,4 +96,9 @@ $data_produk = $model->dataProduk();
                         </div>
                     </div>
                 </main>
+                <?php }
+                    else{
+                       echo "<script>alert('anda tidak boleh masuk');history.back();</script>";
+                    }
+                ?>
                 

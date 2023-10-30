@@ -1,3 +1,7 @@
+<?php 
+require_once 'models/Member.php';
+?>
+
 <!-- Start Banner Area -->
 <section class="banner-area organic-breadcrumb">
 		<div class="container">
