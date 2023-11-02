@@ -3,7 +3,6 @@
 
 <!-- Main Content -->
 <div id="content">
-
 @include('admin.layout.top')
 <div class="container-fluid">
 
@@ -11,5 +10,5 @@
 
 </div>
     </div>
-        </div>
+    
 @include('admin.layout.footer')
