@@ -8,6 +8,7 @@ use App\Http\Controllers\KartuController;
 use App\Http\Controllers\JenisProdukController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\PelangganController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -53,8 +54,12 @@ Route::get('/notfound', [PagenotController::class, 'index']);
 Route::resource('kartu', KartuController::class);
 //memanggil fungsi satu persatu
 Route::get('/jenis_produk', [JenisProdukController::class, 'index']);
+Route::get('/jenis_produk/create', [JenisProdukController::class, 'create']);
+Route::post('/jenis_produk/store', [JenisProdukController::class, 'store']);
 
 Route::get('/produk', [ProdukController::class, 'index']);
+Route::get('/produk/create', [ProdukController::class, 'create']);
+Route::post('/produk/store', [ProdukController::class, 'store']);
 
 Route::resource('pelanggan', PelangganController::class);
 
