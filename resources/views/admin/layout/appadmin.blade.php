@@ -1,4 +1,5 @@
 @include('admin.layout.sidebar')
+
 <div id="content-wrapper" class="d-flex flex-column">
 
 <!-- Main Content -->
