@@ -1,12 +1,13 @@
 @extends('admin.layout.appadmin')
 @section('content')
+
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-@foreach ($pelanggan as $pl)
+
 
 <form method="POST" action="{{route('pelanggan.update', $pl->id)}}" enctype="multipart/form-data">
     @csrf
-    
+    @method('PUT')
   <div class="form-group row">
     <label for="text" class="col-4 col-form-label">Kode</label> 
     <div class="col-8">
@@ -67,5 +68,5 @@
     </div>
   </div>
 </form>
-@endforeach
+
 @endsection
