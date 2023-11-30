@@ -180,8 +180,10 @@
             @endif
         
         </span>
+        @if(Auth::user()->foto)
             <img class="img-profile rounded-circle"
-                src="{{auth()->user()->foto}}">
+                src="{{asset('/storage/fotos/'.Auth::user()->foto)}}">
+                @endif
         </a>
         <!-- Dropdown - User Information -->
         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
